@@ -1,5 +1,6 @@
 import re
 
+
 TESTS_FOR_CONTACT = [
     {
         'name': 'Михаил Булгаков',
@@ -20,6 +21,7 @@ TESTS_FOR_CONTACT = [
         'birthday': '19.07.1893'
     }
 ]
+
 
 FORMAT_PARAMS = [
     "{self.name}",
