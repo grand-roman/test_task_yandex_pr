@@ -1,12 +1,6 @@
 
 import re
 
-ANSWER_TEMPLATE = [
-    '5.0',
-    '4.0',
-    '2.0',
-]
-
 
 def test_name_func_make_divider_of(user_code):
     assert re.compile(
@@ -40,7 +34,34 @@ def test_return_func_division_operation(user_code):
     ), 'Проверьте, что вы возвращаете вложенную функцию "division_operation"'
 
 
-def test_output(output):
-    assert ' '.join(
-        ANSWER_TEMPLATE
-    ) in output, 'Проверьте правильность вывода функций'
+def test_variables_exist(missing_variables):
+    pluralise = 'переменнyю' if len(missing_variables) <= 1 else 'переменные'
+    assert not missing_variables, (
+        f'Пожалуйста, используйте {pluralise} {", ".join(missing_variables)} '
+        'из прекода.'
+    )
+
+
+def test_stdout(author_output, student_output):
+    if student_output:
+        student_lines = student_output.strip().split('\n')
+        expected_lines = author_output.strip().split('\n')
+        if len(expected_lines) == len(student_lines):
+            for line_num, (
+                expected_line, student_line
+            ) in enumerate(
+                zip(expected_lines, student_lines),
+                1
+            ):
+                assert expected_line == student_line, (
+                    'Результат не соответствует ожидаемому.\n'
+                    f'Проверьте {line_num} строку результата '
+                    'выполнения кода. Она должная выглядеть '
+                    'следующим образом:\n'
+                    f'{expected_line}'
+                )
+    assert author_output == student_output, (
+        'Результат не соответствует ожидаемому:\n'
+        f'Ваш вывод:\n {student_output}\n'
+        f'Ожидаемый вывод:\n {author_output}'
+    )
