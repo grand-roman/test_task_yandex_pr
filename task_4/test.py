@@ -45,20 +45,20 @@ def test_return_func_division_operation(user_code):
 def test_stdout(author_output, student_output):
     if student_output:
         student_lines = student_output.strip().split('\n')
-        expected_lines = author_output.strip().split('\n')
-        if len(expected_lines) == len(student_lines):
+        author_lines = author_output.strip().split('\n')
+        if len(author_lines) == len(student_lines):
             for line_num, (
-                expected_line, student_line
+                author_line, student_line
             ) in enumerate(
-                zip(expected_lines, student_lines),
+                zip(author_lines, student_lines),
                 1
             ):
-                assert expected_line == student_line, (
+                assert author_line == student_line, (
                     'Результат не соответствует ожидаемому.\n'
                     f'Проверьте {line_num} строку результата '
                     'выполнения кода. Она должная выглядеть '
                     'следующим образом:\n'
-                    f'{expected_line}'
+                    f'{author_line}'
                 )
     assert author_output == student_output, (
         'Результат не соответствует ожидаемому:\n'
