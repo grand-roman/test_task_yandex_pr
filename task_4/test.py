@@ -18,6 +18,14 @@ def test_name_func_div2(user_code):
     ), 'Проверьте, что вы создали функцию "div2"'
 
 
+def test_name_func_div5(user_code):
+    assert re.compile(
+        r'div5 ='
+    ).findall(
+        user_code
+    ), 'Проверьте, что вы создали функцию "div5"'
+
+
 def test_name_func_division_operation(user_code):
     assert re.compile(
         r'def division_operation\(\w+\):'
@@ -32,14 +40,6 @@ def test_return_func_division_operation(user_code):
     ).findall(
         user_code
     ), 'Проверьте, что вы возвращаете вложенную функцию "division_operation"'
-
-
-def test_variables_exist(missing_variables):
-    pluralise = 'переменнyю' if len(missing_variables) <= 1 else 'переменные'
-    assert not missing_variables, (
-        f'Пожалуйста, используйте {pluralise} {", ".join(missing_variables)} '
-        'из прекода.'
-    )
 
 
 def test_stdout(author_output, student_output):
